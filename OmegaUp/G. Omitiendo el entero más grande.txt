@@ -1,0 +1,49 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        
+        char[][] tablero = new char[3][3];
+        for (int i = 0; i < 3; i++) {
+            String linea = sc.next();
+            for (int j = 0; j < 3; j++) {
+                tablero[i][j] = linea.charAt(j);
+            }
+        }
+
+       
+        if (gana(tablero, 'x')) {
+            System.out.println("Roots!:D");
+        } else if (gana(tablero, 'o')) {
+            System.out.println("Velafloow 8)");
+        } else {
+            System.out.println("Bailo Verta :S");
+        }
+    }
+
+    public static boolean gana(char[][] t, char jugador) {
+        // Revisar filas
+        for (int i = 0; i < 3; i++) {
+            if (t[i][0] == jugador && t[i][1] == jugador && t[i][2] == jugador) {
+                return true;
+            }
+        }
+
+        for (int j = 0; j < 3; j++) {
+            if (t[0][j] == jugador && t[1][j] == jugador && t[2][j] == jugador) {
+                return true;
+            }
+        }
+
+        if (t[0][0] == jugador && t[1][1] == jugador && t[2][2] == jugador) {
+            return true;
+        }
+        if (t[0][2] == jugador && t[1][1] == jugador && t[2][0] == jugador) {
+            return true;
+        }
+
+        return false;
+    }
+}

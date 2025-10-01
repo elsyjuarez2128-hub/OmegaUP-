@@ -1,0 +1,38 @@
+import java.util.Scanner;
+
+public class Main {
+    static final int MOD = 2017;
+
+    static long[][] multiply(long[][] A, long[][] B) {
+        long[][] C = new long[2][2];
+        C[0][0] = (A[0][0] * B[0][0] + A[0][1] * B[1][0]) % MOD;
+        C[0][1] = (A[0][0] * B[0][1] + A[0][1] * B[1][1]) % MOD;
+        C[1][0] = (A[1][0] * B[0][0] + A[1][1] * B[1][0]) % MOD;
+        C[1][1] = (A[1][0] * B[0][1] + A[1][1] * B[1][1]) % MOD;
+        return C;
+    }
+
+    static long[][] matrixPower(long[][] base, long exp) {
+        long[][] result = {{1, 0}, {0, 1}}; // identidad
+        while (exp > 0) {
+            if ((exp & 1) == 1) {
+                result = multiply(result, base);
+            }
+            base = multiply(base, base);
+            exp >>= 1;
+        }
+        return result;
+    }
+
+    static long fibonacci(long n) {
+        if (n == 1 || n == 2) return 1;
+        long[][] M = {{1, 1}, {1, 0}};
+        long[][] Mn = matrixPower(M, n - 2);
+        return (Mn[0][0] + Mn[0][1]) % MOD; // F(n) = Mn[0][0]*F2 + Mn[0][1]*F1
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        long n = sc.nextLong();
+        System.out.println(fibonacci(n));
+    }

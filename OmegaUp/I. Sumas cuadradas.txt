@@ -1,0 +1,26 @@
+import java.util.*;
+
+public class Main {
+    static int N, K;
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        N = sc.nextInt();
+        K = sc.nextInt();
+
+        int resultado = contarFormas(N, K, 1);
+        System.out.println(resultado);
+    }
+    static int contarFormas(int n, int k, int minBase) {
+        if (k == 0) {
+            return (n == 0) ? 1 : 0; 
+        }
+        if (n < 0) return 0;
+
+        int formas = 0;
+        for (int i = minBase; i * i <= n; i++) {
+            formas += contarFormas(n - i * i, k - 1, i);
+        }
+        return formas;
+    }
+}

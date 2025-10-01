@@ -1,0 +1,49 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[][] matriz = new int[N][N];
+
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                matriz[i][j] = sc.nextInt();
+            }
+        }
+
+        boolean esSemimagico = true;
+        int sumaObjetivo = 0;
+
+        for (int j = 0; j < N; j++) {
+            sumaObjetivo += matriz[0][j];
+        }
+
+        for (int i = 0; i < N; i++) {
+            int sumaFila = 0;
+            int sumaColumna = 0;
+            for (int j = 0; j < N; j++) {
+                sumaFila += matriz[i][j];
+                sumaColumna += matriz[j][i];
+            }
+            if (sumaFila != sumaObjetivo || sumaColumna != sumaObjetivo) {
+                esSemimagico = false;
+                break;
+            }
+        }
+
+        int sumaDiagonalPrincipal = 0;
+        for (int i = 0; i < N; i++) {
+            sumaDiagonalPrincipal += matriz[i][i];
+        }
+        if (sumaDiagonalPrincipal != sumaObjetivo) {
+            esSemimagico = false;
+        }
+
+        int sumaDiagonalSecundaria = 0;
+        for (int i = 0; i < N; i++) {
+            sumaDiagonalSecundaria += matriz[i][N - 1 - i];
+        }
+        if (sumaDiagonalSecundaria != sumaObjetivo) {
+            esSemimagico = false;
+        }

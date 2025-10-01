@@ -1,0 +1,31 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int[][] matriz = new int[3][3];
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                matriz[i][j] = sc.nextInt();
+            }
+        }
+
+        boolean iguales = true;
+
+        for (int i = 0; i < 3; i++) {
+            int diagonalPrincipal = matriz[i][i];
+            int diagonalSecundaria = matriz[i][2 - i];
+            if (diagonalPrincipal != diagonalSecundaria) {
+                iguales = false;
+                break;
+            }
+        }
+
+        if (iguales) {
+            System.out.println("Tesoro encontrado");
+        } else {
+            System.out.println("Sigue buscando");
+        }
+    }
+}

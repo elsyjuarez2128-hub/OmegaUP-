@@ -1,0 +1,28 @@
+import java.util.Scanner;
+import java.math.BigInteger;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        long n = sc.nextLong();
+        long k = sc.nextLong();
+        sc.close();
+
+
+        if (k == n) {
+            System.out.println(1);
+            return;
+        }
+
+        BigInteger result = BigInteger.ONE;
+
+       
+        for (long i = k + 1; i <= n; i++) {
+            result = result.multiply(BigInteger.valueOf(i));
+        }
+
+       
+        System.out.println(result);
+    }
+}

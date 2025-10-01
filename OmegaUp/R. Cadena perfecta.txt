@@ -1,0 +1,32 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String cadena = sc.nextLine().trim();
+
+        
+        char[] chars = cadena.toCharArray();
+        Arrays.sort(chars);
+
+        StringBuilder resultado = new StringBuilder();
+
+        int i = 0;
+        while (i < chars.length) {
+            char actual = chars[i];
+            int contador = 0;
+
+            
+            while (i < chars.length && chars[i] == actual) {
+                contador++;
+                i++;
+            }
+
+          
+            resultado.append(contador).append(actual);
+        }
+
+        
+        System.out.println(resultado.toString());
+    }
+}

@@ -1,0 +1,56 @@
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int N = scanner.nextInt();
+        scanner.nextLine();
+        
+        String linea = scanner.nextLine();
+        String[] lineaNum = linea.split(" ");
+        
+        int[] S = new int[N];
+        for (int i = 0; i < N; i++) {
+            S[i] = Integer.parseInt(lineaNum[i]);
+        }
+        
+        f(S, 0, N - 1);
+        
+        for (int i = 0; i < N; i++) {
+            System.out.print(S[i] + " ");
+        }
+    }
+    
+    public static void f(int[] S, int inicio, int fin) {
+        int N = fin - inicio + 1;
+        
+        // Caso base
+        if (N < 2) {
+            return;
+        }
+        
+        //casos recursivos 
+        if (S[inicio] % 2 == 0) {
+            Arrays.sort(S, inicio, fin);
+            
+            f(S, inicio, fin - 1);
+        }
+        
+        if (S[fin] % 2 == 0) {
+            int left = inicio + 1;
+            int right = fin;
+            while (left < right) {
+                int temp = S[left];
+                S[left] = S[right];
+                S[right] = temp;
+                left++;
+                right--;
+            }
+            
+            f(S, inicio + 1, fin);
+        }
+    }
+}
